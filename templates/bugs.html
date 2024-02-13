@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        p {
+            margin-bottom: 10px;
+        }
+        strong {
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+
+<script>
+function getBaseUrl(path){
+    let protocol = window.location.protocol;
+    let host = window.location.hostname;
+    let port = window.location.port;
+
+    return `${protocol}//${host ? host : ""}:${port}${path}`
+}
+
+async function getBugs(user_id, project_id){
+
+    let queryString = '';
+    if (user_id !== undefined) {
+        queryString += `user_id=${user_id}`;
+    }
+    if (project_id !== undefined) {
+        if (queryString !== '') {
+            queryString += '&';
+        }
+        queryString += `project_id=${project_id}`;
+    }
+
+    let bugResp = await fetch(getBaseUrl(`/api/bugs?${queryString}`));
+    let data = await bugResp.json();
+
+    console.log(data);
+
+}
+
+
+</script>
+
+
+<div class="container">
+    <h1>API Connector</h1>
+    <div>User ID:</div>
+    <input id="user-input"/>
+    <div>Project ID:</div>
+    <input id="project-input"/>
+    <button onclick="getBugs(document.getElementById('user-input').value, document.getElementById('project-input').value)">Get Bugs</button>
+</div>
+</body>
+</html>
