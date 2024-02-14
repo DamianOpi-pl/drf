@@ -2,8 +2,9 @@ from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import generics
-from bugs.models import Bug
+
 from api.serializers import BugSerializer
+from bugs.models import Bug
 
 
 class GetBugs(generics.ListAPIView):

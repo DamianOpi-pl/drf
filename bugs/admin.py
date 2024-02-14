@@ -1,5 +1,6 @@
 from django.contrib import admin
-from bugs.models import Project, User, Bug
+
+from bugs.models import Bug, Project, User
 
 
 @admin.register(Project)

@@ -1,6 +1,6 @@
-from django.contrib import admin
 from django.urls import path
-from api.views import GetBugs,BugFilterView
+
+from api.views import BugFilterView
 
 urlpatterns = [
     # path('bugs/', GetBugs.as_view()),
